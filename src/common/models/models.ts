@@ -1,4 +1,3 @@
-// src/common/models/models.ts
 import { Provider } from '@nestjs/common';
 import initModels from '../database/initModels';
 
