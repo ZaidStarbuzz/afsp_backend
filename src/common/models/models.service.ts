@@ -15,6 +15,7 @@ export type Options = {
   limit?: number;
   offset?: number;
   subQuery?: boolean;
+  nest?: boolean;
 };
 
 @Injectable()
@@ -108,6 +109,21 @@ export class ModelsService {
     return count;
   }
 
+  // private validateOptions(options: Options): Options {
+  //   let { where = {}, include = [], attributes = [], group = [] } = options;
+
+  //   where = Object.keys(where).length !== 0 ? where : {};
+  //   include = include.length !== 0 ? include : [];
+  //   attributes =
+  //     Array.isArray(attributes) && attributes.length !== 0
+  //       ? attributes
+  //       : Object.keys(attributes).length !== 0
+  //         ? attributes
+  //         : {};
+  //   group = group.length !== 0 ? group : [];
+
+  //   return { where, include, attributes, group };
+  // }
   private validateOptions(options: Options): Options {
     let { where = {}, include = [], attributes = [], group = [] } = options;
 
@@ -121,7 +137,14 @@ export class ModelsService {
           : {};
     group = group.length !== 0 ? group : [];
 
-    return { where, include, attributes, group };
+    return {
+      where,
+      include,
+      attributes,
+      group,
+      raw: true, // ✅ forces plain objects instead of Sequelize instances
+      nest: true, // ✅ keeps includes nested (login.user instead of user.is_active in flat keys)
+    };
   }
 
   private async pagination(

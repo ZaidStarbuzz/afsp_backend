@@ -9,7 +9,7 @@ export class DbService implements OnModuleInit {
 
     try {
       // await sequelize.sync({ alter: true });
-      // console.log('✅ Successfully synced the inf database');
+      // console.log('✅ Successfully synced the inf database!');
     } catch (error) {
       console.error('❌ Error syncing the database:', error);
     }
